@@ -1,0 +1,37 @@
+.button {
+  /* https://sarunw.com/posts/dark-color-cheat-sheet/ */
+  background-color: #2c2c2eff;
+  border: solid;
+  color: #ffffffff;
+  font-size: 16px;
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+}
+
+#screen {
+  color: #ffffffff;
+  font-size: 30px;
+  min-height: 40px;
+  margin: 20px 50px;
+}
+
+#buttons {
+  border-top: 2px solid #2c2c2eff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#calculator {
+  background-color: #000000ff;
+  margin: auto;
+  border: 1px;
+  width: 450px;
+  border-radius: 10%;
+  padding-bottom: 20px;
+  padding-top: 5px;
+}
