@@ -1,3 +1,22 @@
+let buttonMatrix = [
+  ["7", "8", "9", "DEL", "AC"],
+  ["4", "5", "6", "*", "/"],
+  ["1", "2", "3", "+", "-"],
+  ["0", ".", "", "", "="],
+];
+let memory = [0, 0, 0];
+
+window.addEventListener("keydown", function (e) {
+  if (buttonMatrix.some((row) => row.includes(e.key))) {
+    buttonToPress = document.getElementById(e.key);
+    buttonToPress.click();
+  }
+  if (e.key == "Enter") {
+    buttonToPress = document.getElementById("=");
+    buttonToPress.click();
+  }
+});
+
 function add(a, b) {
   return a + b;
 }
@@ -30,53 +49,59 @@ function operate(a, operator, b) {
   }
 }
 
-let buttonMatrix = [
-  ["7", "8", "9", "DEL", "AC"],
-  ["4", "5", "6", "*", "/"],
-  ["1", "2", "3", "+", "-"],
-  ["0", ".", "", "", "="],
-];
-let memory = [0, 0, 0];
-
 // Takes a string (eg: "1" or "+") and takes appropriate action
 function buttonPress(press) {
   screen = document.getElementById("screen");
-  console.log(press);
+  equals = document.getElementById("=");
   switch (press) {
     case "AC":
-      console.log("clearning screen");
       screen.innerText = "";
+      memory = [0, 0, 0];
       break;
     case "DEL":
       screen.innerText = screen.innerText.slice(0, -1);
       break;
     case "+":
+      if (memory[1] != 0) {
+        equals.click();
+      }
       memory[0] = screen.innerText;
       memory[1] = "+";
       screen.innerText = "";
       break;
     case "-":
+      if (memory[1] != 0) {
+        equals.click();
+      }
       memory[0] = screen.innerText;
       memory[1] = "-";
       screen.innerText = "";
       break;
     case "*":
+      if (memory[1] != 0) {
+        equals.click();
+      }
       memory[0] = screen.innerText;
       memory[1] = "*";
       screen.innerText = "";
       break;
     case "/":
+      if (memory[1] != 0) {
+        equals.click();
+      }
       memory[0] = screen.innerText;
       memory[1] = "/";
       screen.innerText = "";
       break;
     case "=":
       console.log("Operating" + memory[0] + memory[1] + screen.innerText);
-      screen.innerText = operate(memory[0], memory[1], screen.innerText);
-
+      let result = operate(memory[0], memory[1], screen.innerText);
+      screen.innerText = result;
+      memory[0] = result;
+      memory[1] = 0;
+      memory[2] = 0;
       break;
     default:
-      console.log("default option");
       screen.innerText += press;
   }
 }
@@ -85,9 +110,11 @@ function buildButtons() {
   buttonsDiv = document.getElementById("buttons");
   for (row of buttonMatrix) {
     for (buttonText of row) {
-      let button = document.createElement("button");
+      // It's better to use a instead of button elements because button elements can experience unwanted presses when the enter key is used.
+      let button = document.createElement("a");
       button.innerText = buttonText;
       button.classList.add("button");
+      button.setAttribute("id", buttonText);
       button.onclick = function (e) {
         buttonPress(e.originalTarget.firstChild.data);
       };
