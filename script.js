@@ -115,6 +115,10 @@ function buildButtons() {
       button.innerText = buttonText;
       button.classList.add("button");
       button.setAttribute("id", buttonText);
+      button.ontouchstart = function (e) {
+        e.preventDefault();
+        buttonPress(e.targetTouches[0].target.id);
+      };
       button.onclick = function (e) {
         buttonPress(e.originalTarget.firstChild.data);
       };
