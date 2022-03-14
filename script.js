@@ -63,7 +63,7 @@ function buttonPress(press) {
       break;
     case "+":
       if (memory[1] != 0) {
-        equals.click();
+        buttonPress("=");
       }
       memory[0] = screen.innerText;
       memory[1] = "+";
@@ -71,7 +71,7 @@ function buttonPress(press) {
       break;
     case "-":
       if (memory[1] != 0) {
-        equals.click();
+        buttonPress("=");
       }
       memory[0] = screen.innerText;
       memory[1] = "-";
@@ -79,7 +79,7 @@ function buttonPress(press) {
       break;
     case "*":
       if (memory[1] != 0) {
-        equals.click();
+        buttonPress("=");
       }
       memory[0] = screen.innerText;
       memory[1] = "*";
@@ -87,7 +87,7 @@ function buttonPress(press) {
       break;
     case "/":
       if (memory[1] != 0) {
-        equals.click();
+        buttonPress("=");
       }
       memory[0] = screen.innerText;
       memory[1] = "/";
